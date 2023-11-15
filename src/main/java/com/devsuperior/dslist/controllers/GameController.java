@@ -15,16 +15,23 @@ import com.devsuperior.dslist.service.GameListService;
 import com.devsuperior.dslist.service.GameService;
 
 @RestController
-@RequestMapping(value = "/lists")
+@RequestMapping(value = "/games")
 public class GameController {
 	
 	@Autowired
-	private GameListService gameListService;
+	private GameService gameService;
 	
 	@GetMapping
-	public List<GameListDTO> findAll(){
+	public List<GameMinDTO> findAll(){
 		
-		List<GameListDTO> result = gameListService.findAll();
+		List<GameMinDTO> result = gameService.findAll();
+		return result;
+	}
+	
+	@GetMapping(value="/{id}")
+	public GameDTO findById(@PathVariable Long id){
+		
+		GameDTO result = gameService.findById(id);
 		return result;
 	}
 	
